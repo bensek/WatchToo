@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+
+android {
+    compileSdk ProjectConfig.compileSdk
+
+    defaultConfig {
+        minSdk ProjectConfig.minSdk
+        targetSdk ProjectConfig.targetSdk
+        versionCode ProjectConfig.versionCode
+        versionName ProjectConfig.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation Compose.composeActivity
+    implementation Compose.composeUi
+    implementation Compose.toolingPreview
+    implementation Compose.material
+
+    implementation Koin.core
+    implementation Koin.android
+    implementation Koin.compose
+    implementation Koin.navigation
+
+//    testImplementation Test.junit
+//    androidTestImplementation Test.junitExt
+//    androidTestImplementation Test.espresso
+//    androidTestImplementation Compose.composeJunit
+//    debugImplementation Compose.toolingTest
+//    debugImplementation Compose.testManifest
+}
